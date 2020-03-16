@@ -6,7 +6,6 @@ namespace dreamHotel.Models
 {
     public class Reservation
     {
-        [Required(ErrorMessage = "Идентификатор пользователя не установлен")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Пользователь не установлен")]
@@ -26,6 +25,8 @@ namespace dreamHotel.Models
         public bool Paid { get; set; }
         public bool Breakfast { get; set; }
 
+        public Room Room{get; set;}
+
         public Reservation()
         {
 
@@ -39,7 +40,8 @@ namespace dreamHotel.Models
             decimal totalCost,
             decimal oneDayPrice,
             bool paid,
-            bool breakfast
+            bool breakfast,
+            Room room
             )
         {
             Id = id;
@@ -50,7 +52,8 @@ namespace dreamHotel.Models
             OneDayPrice = oneDayPrice;
             Paid = paid;
             Breakfast = breakfast;
+            Room = room;
         }
     }
-
+  
 }
