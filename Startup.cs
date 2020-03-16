@@ -36,11 +36,11 @@ namespace dreamHotel
             // services.AddIdentityServer()
             //     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            // services.AddAuthentication()
+            //     .AddIdentityServerJwt();
 
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            // services.AddRazorPages();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -70,9 +70,9 @@ namespace dreamHotel
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseIdentityServer();
-            app.UseAuthorization();
+            // app.UseAuthentication();
+            // app.UseIdentityServer();
+            // app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
