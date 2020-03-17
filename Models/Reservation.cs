@@ -9,7 +9,7 @@ namespace dreamHotel.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Пользователь не установлен")]
-        public User User { get; set; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Дата заезда не установлена")]
         public DateTime CheckInDate { get; set; }
@@ -25,7 +25,7 @@ namespace dreamHotel.Models
         public bool Paid { get; set; }
         public bool Breakfast { get; set; }
 
-        public Room Room{get; set;}
+        public Room Room { get; set; }
 
         public Reservation()
         {
@@ -34,20 +34,20 @@ namespace dreamHotel.Models
 
         public Reservation(
             int id,
-            User user,
+            int userId,
+            Room room,
             DateTime checkInDate,
             DateTime checkOutDate,
-            decimal totalCost,
             decimal oneDayPrice,
+            decimal totalCost,
             bool paid,
-            bool breakfast,
-            Room room
+            bool breakfast
             )
         {
             Id = id;
-            User = user;
-            CheckOutDate = checkOutDate;
+            UserId = userId;
             CheckInDate = checkInDate;
+            CheckOutDate = checkOutDate;
             TotalCost = totalCost;
             OneDayPrice = oneDayPrice;
             Paid = paid;
@@ -55,5 +55,5 @@ namespace dreamHotel.Models
             Room = room;
         }
     }
-  
+
 }

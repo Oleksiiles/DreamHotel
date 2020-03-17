@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace dreamHotel.Models
 {
-    public class newReservation
+    public class NewReservation
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Дата заезда не установлена")]
         public DateTime CheckInDate { get; set; }
@@ -14,13 +15,13 @@ namespace dreamHotel.Models
         [Required(ErrorMessage = "Дата выезда не установлена")]
         public DateTime CheckOutDate { get; set; }
         public bool Breakfast { get; set; }
-        public Room Room{get; set;}
-        public newReservation()
+        public Room Room { get; set; }
+        public NewReservation()
         {
 
         }
 
-        public newReservation(
+        public NewReservation(
             DateTime checkInDate,
             DateTime checkOutDate,
             bool breakfast,
@@ -33,5 +34,5 @@ namespace dreamHotel.Models
             Room = room;
         }
     }
-  
+
 }

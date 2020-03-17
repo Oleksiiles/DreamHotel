@@ -5,7 +5,7 @@ using dreamHotel.Controllers;
 using dreamHotel.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ToDoList.Service
+namespace dreamHotel.Services
 {
     public class BookService
     {
@@ -16,18 +16,38 @@ namespace ToDoList.Service
             this._context = context;
         }
 
-
-        public Reservation BookCreate(Reservation reservation)
+        public Reservation CreateСompleteReservation(NewReservation newReservation)
         {
-            _context.Reservations.Add(reservation);
-            _context.SaveChanges();
+            decimal OneDayPrice = newReservation.Room.Price;
+            var countStayDay = newReservation.CheckOutDate.Subtract(newReservation.CheckInDate).Days;
+            decimal TotalCost = countStayDay * OneDayPrice;
 
-            return reservation;
+            return new Reservation(
+                newReservation.Id,
+                newReservation.UserId,
+                newReservation.Room,
+                newReservation.CheckInDate,
+                newReservation.CheckOutDate,
+                OneDayPrice,
+                TotalCost,
+                false,
+                newReservation.Breakfast
+                );
         }
 
-        public ActionResult<IEnumerable<Reservation>> All()
+        public Reservation Create(NewReservation newReservation)
         {
-            return _context.Reservations.ToList();
+            var completeReservation = CreateСompleteReservation(newReservation);
+            _context.Reservations.Add(completeReservation);
+            _context.SaveChanges();
+
+            return completeReservation;
+        }
+
+        public IEnumerable<Reservation> AllReservation(int userId)
+        {
+            return _context.Reservations.Where(reservation => reservation.UserId == userId);
+
         }
 
         public Reservation Update(int id, Reservation newReservation)
@@ -36,12 +56,12 @@ namespace ToDoList.Service
             {
                 if (Reservation.Id == id)
                 {
-                    Reservation.User = newReservation.User;
+                    Reservation.UserId = newReservation.UserId;
                     Reservation.CheckInDate = newReservation.CheckInDate;
                     Reservation.CheckOutDate = newReservation.CheckOutDate;
                     Reservation.TotalCost = newReservation.TotalCost;
                     Reservation.OneDayPrice = newReservation.OneDayPrice;
-                    Reservation.Paid  = newReservation.Paid;
+                    Reservation.Paid = newReservation.Paid;
                     Reservation.Breakfast = newReservation.Breakfast;
                 }
             }
