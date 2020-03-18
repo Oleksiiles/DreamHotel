@@ -50,27 +50,39 @@ namespace dreamHotel.Services
 
         }
 
+        public Reservation GetById(string userId, string reservationId)
+        {
+            var reservation = _context.Reservations.Find(reservationId);
+            if (reservationId != null && reservation.UserId == userId)
+            {
+                return reservation;
+            }
+            return null;
+        }
+
         public Reservation Update(string id, Reservation newReservation)
         {
             var reservation = _context.Reservations.Find(id);
             if (reservation != null)
             {
-                // code...
+
+                reservation.UserId = newReservation.UserId;
+                reservation.CheckInDate = newReservation.CheckInDate;
+                reservation.CheckOutDate = newReservation.CheckOutDate;
+                reservation.TotalCost = newReservation.TotalCost;
+                reservation.OneDayPrice = newReservation.OneDayPrice;
+                reservation.Paid = newReservation.Paid;
+                reservation.Breakfast = newReservation.Breakfast;
+                _context.SaveChanges();
+                return newReservation;
             }
+            else
             {
-                if (Reservation.Id == id)
-                {
-                    Reservation.UserId = newReservation.UserId;
-                    Reservation.CheckInDate = newReservation.CheckInDate;
-                    Reservation.CheckOutDate = newReservation.CheckOutDate;
-                    Reservation.TotalCost = newReservation.TotalCost;
-                    Reservation.OneDayPrice = newReservation.OneDayPrice;
-                    Reservation.Paid = newReservation.Paid;
-                    Reservation.Breakfast = newReservation.Breakfast;
-                }
+                return null;
+
+
             }
-            _context.SaveChanges();
-            return newReservation;
+
         }
 
         public ActionResult<IEnumerable<Reservation>> Remove(string id)
@@ -85,10 +97,7 @@ namespace dreamHotel.Services
             _context.SaveChanges();
             return _context.Reservations.ToList();
         }
-        // public dynamic VerifyId(int id)
-        // {
-        //     return _context.Reservations.FindAsync(id);
-        // }
+
 
     }
 }

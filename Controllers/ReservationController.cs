@@ -32,39 +32,67 @@ namespace asp_react.Controllers
 
         // GET api/reservation
         [HttpGet("")]
-        public IEnumerable<Reservation> GetReservations()
+        public ActionResult GetReservations()
         {
-            return _bookService.AllReservation(UserId);
+            var reservation = _bookService.AllReservation(UserId);
+            if (reservation == null)
+            {
+                return NotFound();
+
+            }
+            return Ok(reservation);
+
         }
 
         // GET api/reservation/5
         [HttpGet("{id}")]
-        public ActionResult<Reservation> GetTaskById(int id)
+        public ActionResult<Reservation> GetReservationById(string id)
         {
-            return null;
+            var reservation = _bookService.GetById(UserId, id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+            return Ok(reservation);
         }
 
         // POST api/reservation
         [HttpPost("")]
-        public Reservation PostTask(NewReservation newReservation)
+        public ActionResult PostTask(NewReservation newReservation)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
             newReservation.UserId = UserId;
-            return _bookService.Create(newReservation);
+            var reservation = _bookService.Create(newReservation);
+            return Ok(reservation);
         }
 
 
         // PUT api/reservation/5
         [HttpPut("{id}")]
-        public void PutTask(string id, Reservation reservation)
+        public ActionResult PutTask(string id, Reservation reservation)
         {
-            _bookService.Update(id, reservation);
+            var newReservation = _bookService.Update(id, reservation);
+
+            if (newReservation == null)
+            {
+                return NotFound();
+            }
+            return Ok(newReservation);
         }
 
         // DELETE api/reservation/5
         [HttpDelete("{id}")]
-        public void DeleteTaskById(string id)
+        public ActionResult DeleteTaskById(string id)
         {
-            _bookService.Remove(id);
+            var reservation = _bookService.Remove(id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+            return Ok(reservation);
         }
     }
 }
