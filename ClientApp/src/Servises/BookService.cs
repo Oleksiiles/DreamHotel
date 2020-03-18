@@ -52,7 +52,11 @@ namespace dreamHotel.Services
 
         public Reservation Update(string id, Reservation newReservation)
         {
-            foreach (var Reservation in _context.Reservations)
+            var reservation = _context.Reservations.Find(id);
+            if (reservation != null)
+            {
+                // code...
+            }
             {
                 if (Reservation.Id == id)
                 {
