@@ -7,7 +7,7 @@ namespace dreamHotel.Models
     {
 
         [Required(ErrorMessage = "Идентификатор комнаты не установлен")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required(ErrorMessage = "Тип комнаты не установлен")]
         public string Type { get; set; }
@@ -30,7 +30,7 @@ namespace dreamHotel.Models
         {
 
         }
-        public Room(int id, string type, int floorNumber, int roomNumber, decimal price, int numberOfBeds)
+        public Room(string id, string type, int floorNumber, int roomNumber, decimal price, int numberOfBeds)
         {
             Id = id;
             Type = type;

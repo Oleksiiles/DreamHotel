@@ -44,13 +44,13 @@ namespace dreamHotel.Services
             return completeReservation;
         }
 
-        public IEnumerable<Reservation> AllReservation(int userId)
+        public IEnumerable<Reservation> AllReservation(string userId)
         {
             return _context.Reservations.Where(reservation => reservation.UserId == userId);
 
         }
 
-        public Reservation Update(int id, Reservation newReservation)
+        public Reservation Update(string id, Reservation newReservation)
         {
             foreach (var Reservation in _context.Reservations)
             {
@@ -69,7 +69,7 @@ namespace dreamHotel.Services
             return newReservation;
         }
 
-        public ActionResult<IEnumerable<Reservation>> Remove(int id)
+        public ActionResult<IEnumerable<Reservation>> Remove(string id)
         {
             foreach (var reservation in _context.Reservations)
             {
