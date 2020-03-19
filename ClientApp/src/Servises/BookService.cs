@@ -50,7 +50,7 @@ namespace dreamHotel.Services
 
         }
 
-        public Reservation GetById(string userId, string reservationId)
+        public Reservation GetById(string userId, int? reservationId)
         {
             var reservation = _context.Reservations.Find(reservationId);
             if (reservationId != null && reservation.UserId == userId)
@@ -60,7 +60,7 @@ namespace dreamHotel.Services
             return null;
         }
 
-        public Reservation Update(string id, Reservation newReservation)
+        public Reservation Update(int id, Reservation newReservation)
         {
             var reservation = _context.Reservations.Find(id);
             if (reservation != null)
@@ -85,7 +85,7 @@ namespace dreamHotel.Services
 
         }
 
-        public ActionResult<IEnumerable<Reservation>> Remove(string id)
+        public ActionResult<IEnumerable<Reservation>> Remove(int id)
         {
             foreach (var reservation in _context.Reservations)
             {

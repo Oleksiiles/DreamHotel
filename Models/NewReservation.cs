@@ -6,7 +6,7 @@ namespace dreamHotel.Models
 {
     public class NewReservation
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string UserId { get; set; }
 
         [Required(ErrorMessage = "Дата заезда не установлена")]

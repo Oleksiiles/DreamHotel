@@ -4,7 +4,6 @@ namespace dreamHotel.Models
 {
     public class User
     {
-        [Required(ErrorMessage = "Идентификатор пользователя не установлен")]
         public string Id { get; set; }
 
         [Required(ErrorMessage = "Не указано имя пользователя")]

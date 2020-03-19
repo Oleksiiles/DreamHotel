@@ -46,7 +46,7 @@ namespace asp_react.Controllers
 
         // GET api/reservation/5
         [HttpGet("{id}")]
-        public ActionResult<Reservation> GetReservationById(string id)
+        public ActionResult<Reservation> GetReservationById(int id)
         {
             var reservation = _bookService.GetById(UserId, id);
             if (reservation == null)
@@ -71,7 +71,7 @@ namespace asp_react.Controllers
 
         // PUT api/reservation/5
         [HttpPut("{id}")]
-        public ActionResult PutTask(string id, Reservation reservation)
+        public ActionResult PutTask(int id, Reservation reservation)
         {
             var newReservation = _bookService.Update(id, reservation);
 
@@ -84,7 +84,7 @@ namespace asp_react.Controllers
 
         // DELETE api/reservation/5
         [HttpDelete("{id}")]
-        public ActionResult DeleteTaskById(string id)
+        public ActionResult DeleteTaskById(int id)
         {
             var reservation = _bookService.Remove(id);
 

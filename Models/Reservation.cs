@@ -6,7 +6,7 @@ namespace dreamHotel.Models
 {
     public class Reservation
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Пользователь не установлен")]
         public string UserId { get; set; }
@@ -33,7 +33,7 @@ namespace dreamHotel.Models
         }
 
         public Reservation(
-            string id,
+            int id,
             string userId,
             Room room,
             DateTime checkInDate,
