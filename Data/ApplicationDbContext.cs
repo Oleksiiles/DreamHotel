@@ -10,12 +10,18 @@ using System.Threading.Tasks;
 
 namespace dreamHotel.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
+            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options)
         {
         }
+        public DbSet<Models.Reservation> Reservations { get; set; }
+        public DbSet<Models.Room> Rooms { get; set; }
+        public DbSet<Models.User> Users { get; set; }
+
+
+
     }
 }
