@@ -24,13 +24,31 @@ namespace dreamHotel.Services
 
         public IEnumerable<Room> SearchByDate(DateTime checkIn, DateTime checkOut)
         {
-            IEnumerable<Room> freeRooms = new List<Room>();
+            IEnumerable<Room> allRooms = AllRooms();
+            List<Room> freeRooms = new List<Room>();
+
             IEnumerable<Reservation> reservations = _context.Reservations;
+            IEnumerable<Reservation> bookForSerarchDay = reservations
+            .Where(reservation => checkIn >= reservation.CheckInDate && checkIn <= reservation.CheckOutDate);
 
-            // TODO: compare the request date with the reservation dates and determine 
-            //which rooms are free and return their list
+            foreach (var room in allRooms)
+            {
+                bool hasReserve = false;
+                foreach (var reservation in bookForSerarchDay)
+                {
+                    if (room.Id == reservation.Room.Id)
+                    {
+                        hasReserve = true;
+                    }
+                }
+                if (!hasReserve)
+                {
+                    freeRooms.Add(room);
+                }
+            }
 
-            // reservations.Where(reservation => reservation.CheckInDate)
+
+
             return freeRooms;
         }
 
